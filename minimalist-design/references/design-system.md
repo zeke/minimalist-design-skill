@@ -1,195 +1,140 @@
 # Design System Reference
 
-## CSS custom properties
+## CSS tokens
 
 ```css
 :root {
-  /* Font */
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
-  --font-size-base: 1rem;       /* 16px — the only size */
+  --font: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  --font-size: 1rem;
   --line-height: 1.6;
-
-  /* Stone light */
-  --color-bg:      #FAFAF9;   /* stone-50  */
-  --color-surface: #F5F5F4;   /* stone-100 */
-  --color-border:  #E7E5E4;   /* stone-200 */
-  --color-text:    #0C0A09;   /* stone-950 */
+  --bg:   #FAFAF9;   /* stone-50  */
+  --text: #0C0A09;   /* stone-950 */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg:      #0C0A09;  /* stone-950 */
-    --color-surface: #1C1917;  /* stone-900 */
-    --color-border:  #292524;  /* stone-800 */
-    --color-text:    #FAFAF9;  /* stone-50  */
+    --bg:   #0C0A09;  /* stone-950 */
+    --text: #FAFAF9;  /* stone-50  */
   }
 }
 
-* {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-base);
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: 400;
+  font-style: normal;
   line-height: var(--line-height);
-}
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  color: var(--text);
+  background: var(--bg);
 }
 ```
 
-## Stone color scale
+Two colors only. No opacity variants, no surface tints, no border palette.
 
-| Token      | Hex       | Light mode role        | Dark mode role         |
-| ---------- | --------- | ---------------------- | ---------------------- |
-| stone-50   | #FAFAF9   | Background             | Primary text           |
-| stone-100  | #F5F5F4   | Surface / card bg      | —                      |
-| stone-200  | #E7E5E4   | Border                 | —                      |
-| stone-300  | #D6D3D1   | Subtle border          | —                      |
-| stone-400  | #A8A29E   | Placeholder text       | Tertiary text          |
-| stone-500  | #78716C   | Muted text             | Secondary text         |
-| stone-600  | #57534E   | —                      | Subtle border          |
-| stone-700  | #44403C   | —                      | Border                 |
-| stone-800  | #292524   | —                      | Border (strong)        |
-| stone-900  | #1C1917   | —                      | Surface / card bg      |
-| stone-950  | #0C0A09   | Primary text           | Background             |
+## Stone color values
 
-## Opacity ladder
+| Token     | Hex       | Role       |
+| --------- | --------- | ---------- |
+| stone-50  | #FAFAF9   | Light bg / Dark text |
+| stone-950 | #0C0A09   | Light text / Dark bg |
 
-Opacity is the only tool for text hierarchy. Never change the stone hue to de-emphasize text.
+That is the entire palette. No intermediate steps.
 
-Two levels for readable text — both pass WCAG AA (4.5:1) for normal text in both light and dark mode:
-
-| Role           | CSS             | Tailwind         | Light contrast | Dark contrast |
-| -------------- | --------------- | ---------------- | -------------- | ------------- |
-| Primary        | `opacity: 1`    | (none)           | 18.9:1 (AAA)   | 18.9:1 (AAA)  |
-| Secondary      | `opacity: 0.7`  | `opacity-70`     | 7.5:1 (AAA)    | 9.3:1 (AAA)   |
-
-For non-text elements only (borders, icons, decorative dividers) where WCAG 3:1 UI component threshold applies:
-
-| Role        | CSS             | Tailwind       | Light contrast | Dark contrast  |
-| ----------- | --------------- | -------------- | -------------- | -------------- |
-| Placeholder | `opacity: 0.5`  | `opacity-50`   | 3.7:1          | 5.2:1          |
-
-Do not use `opacity-60`, `opacity-35`, `opacity-25`, or lower for body text — `opacity-60` passes in dark mode but fails AA in light mode (5.2:1 is fine for large/bold but not normal body text at the strictest reading). Use `opacity-70` as the floor for all readable text.
-
-Example — a card with a title and description:
-```html
-<div>
-  <p>Primary label</p>
-  <p class="opacity-70">Secondary description</p>
-</div>
-```
-
-Example — an input with placeholder:
-```html
-<input placeholder="hint text" class="placeholder:opacity-50">
-```
-
-## Typography
-
-```css
-/* All text: same size, same font */
-font-family: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
-font-size: 1rem;
-line-height: 1.6;
-
-/* Headings: medium weight only */
-font-weight: 500;
-
-/* Body: normal weight */
-font-weight: 400;
-
-/* Asides / captions: italic */
-font-style: italic;
-```
-
-Weight is the only typographic differentiator:
-
-| Role              | Weight        | Tailwind         |
-| ----------------- | ------------- | ---------------- |
-| Headings          | 500 (medium)  | `font-medium`    |
-| Body / UI labels  | 400 (normal)  | `font-normal`    |
-| Captions / asides | 400 italic    | `italic`         |
-
-No `font-bold`, no `text-xl`, no `text-sm`. Size is fixed at `1rem`.
-
-## Spacing
-
-Vertical rhythm uses a consistent `0.5rem` (8px) base unit:
-
-| Scale | Value  | Tailwind  | Use                          |
-| ----- | ------ | --------- | ---------------------------- |
-| 1     | 4px    | `gap-1`   | Tight inline gaps            |
-| 2     | 8px    | `gap-2`   | Within a component           |
-| 4     | 16px   | `gap-4`   | Between components           |
-| 6     | 24px   | `gap-6`   | Between sections (small)     |
-| 8     | 32px   | `gap-8`   | Between sections (normal)    |
-| 16    | 64px   | `py-16`   | Section padding              |
-| 24    | 96px   | `py-24`   | Hero / large section padding |
-
-## Layout constraints
-
-```
-Max content width (prose):  max-w-3xl   (48rem / 768px)
-Max content width (wide):   max-w-5xl   (64rem / 1024px)
-Horizontal padding:         px-6 (mobile) → px-8 (md+)
-```
-
-Tailwind:
-```html
-<main class="max-w-3xl mx-auto px-6 md:px-8 py-16">
-```
-
-## Dark mode implementation
+## Dark mode
 
 Pure CSS, no JavaScript:
 
 ```css
 @media (prefers-color-scheme: dark) {
-  /* Override color tokens here */
+  :root { --bg: #0C0A09; --text: #FAFAF9; }
 }
 ```
 
-In Tailwind, use the `dark:` variant with `@media` strategy (default in v3):
+In Tailwind:
 ```html
 <body class="bg-stone-50 text-stone-950 dark:bg-stone-950 dark:text-stone-50">
 ```
 
-Every color class needs a `dark:` counterpart. Checklist:
-- `bg-*` → `dark:bg-*`
-- `text-*` → `dark:text-*`
-- `border-*` → `dark:border-*`
-- `divide-*` → `dark:divide-*`
+Every element inherits color from `html`. Nothing needs explicit color assignment except the body.
 
-Opacity-based text (e.g. `opacity-60`) works in both modes automatically — no dark variant needed.
+## Typography
 
-## Borders
+One variant: 400 normal. Do not load or use 500 medium or italic.
 
-Use borders sparingly — only when they separate genuinely distinct content:
-
-```html
-<!-- Subtle divider -->
-<hr class="border-stone-200 dark:border-stone-800">
-
-<!-- Card outline -->
-<div class="border border-stone-200 dark:border-stone-800">
-
-<!-- Input -->
-<input class="border border-stone-300 dark:border-stone-700 ...">
+```css
+font-family: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+font-size: 1rem;
+font-weight: 400;
+font-style: normal;
+line-height: 1.6;
 ```
 
-No decorative borders. No double borders. No rounded corners beyond `rounded` (4px).
+Google Fonts — load only what is used:
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+```
 
-## Swapping the palette
+## Structure
+
+Hierarchy comes from ASCII conventions:
+
+```
+SECTION HEADING
+
+Body paragraph. One blank line between paragraphs.
+
+  Indented text suggests subordination.
+
+- List item
+- List item
+
+key     description text here
+key     description text here
+
+---
+```
+
+- Section headings: ALL-CAPS, followed by a blank line. No special styling.
+- Dividers: `<hr>` rendered as a plain horizontal line, or a literal `---` in pre-formatted blocks.
+- Lists: standard `<ul>` or `<ol>`, no custom markers needed.
+- Key/value: `<dl>` or a two-column layout with consistent left-alignment.
+
+## Layout
+
+```css
+body {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+```
+
+Single column only. No grid, no multi-column layout. Content width is the only structural constraint.
+
+## Spacing
+
+| Use                        | Value      |
+| -------------------------- | ---------- |
+| Between paragraphs         | 1rem       |
+| Between sections           | 3rem       |
+| Between list items         | 0.25rem    |
+| Section top padding        | 3rem       |
+| Body bottom padding        | 6rem       |
+
+## Palette swap
 
 Replace `stone` with any single-hue Tailwind scale:
 
-| Option    | Character                        |
-| --------- | -------------------------------- |
-| `stone`   | Warm, slightly brown (default)   |
-| `zinc`    | Neutral, slightly blue-gray      |
-| `neutral` | Perfectly neutral gray           |
-| `slate`   | Cool, blue-tinted gray           |
-| `gray`    | Standard gray                    |
+| Scale   | Character              |
+| ------- | ---------------------- |
+| stone   | Warm gray (default)    |
+| zinc    | Slightly cool gray     |
+| neutral | Perfectly neutral      |
+| slate   | Blue-tinted gray       |
+| gray    | Standard gray          |
 
-Do a global find-and-replace: `stone` → your chosen scale. Never mix scales.
+Never mix scales. Find/replace `stone` → chosen scale throughout.

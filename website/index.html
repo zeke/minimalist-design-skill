@@ -6,16 +6,18 @@
   <title>minimalist-design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root { --bg: #FAFAF9; --text: #0C0A09; }
     @media (prefers-color-scheme: dark) { :root { --bg: #0C0A09; --text: #FAFAF9; } }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       font-family: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', monospace;
       font-size: 1rem;
+      font-weight: 400;
+      font-style: normal;
       line-height: 1.6;
       background: var(--bg);
       color: var(--text);
@@ -28,99 +30,83 @@
     }
 
     p + p { margin-top: 1rem; }
+    section { margin-top: 3rem; }
+    section > p:first-child { margin-bottom: 1rem; }
+
     ul, ol { padding-left: 1.5rem; margin-top: 0.5rem; }
     li + li { margin-top: 0.25rem; }
 
-    section { margin-top: 3rem; }
-
-    h2 {
-      font-weight: 500;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid currentColor;
-      opacity: 0.35;
+    hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      margin: 3rem 0;
     }
-
-    .muted { opacity: 0.7; }
-
-    a { color: inherit; }
-    a:hover { opacity: 0.7; }
 
     pre {
       margin-top: 1rem;
       padding: 1rem;
       border: 1px solid currentColor;
-      opacity: 0.7;
       overflow-x: auto;
     }
 
+    a { color: inherit; }
+
     dl { margin-top: 0.5rem; }
-    dt { font-weight: 500; margin-top: 1rem; }
-    dd { opacity: 0.7; }
+    dl div { display: flex; gap: 2rem; margin-top: 0.5rem; }
+    dt { min-width: 8rem; }
   </style>
 </head>
 <body>
 
-  <p style="font-weight:500">minimalist-design</p>
-  <p class="muted" style="margin-top:0.25rem">An agent skill for building minimal, monospace interfaces.</p>
+<p>minimalist-design</p>
+<p>An agent skill for building minimal, monospace interfaces.</p>
 
-  <section>
-    <h2>What it is</h2>
-    <p>A design system that uses a single monospace font at a single size. IBM Plex Mono throughout, 1rem everywhere. No type scale. Hierarchy comes from font weight and opacity, not size.</p>
-    <p class="muted">The stone palette by default — a warm neutral gray that works in light and dark mode. Dark mode is handled entirely by <code>prefers-color-scheme</code>. No JavaScript, no toggle.</p>
-    <p class="muted">No shadows, no gradients, no decorative borders. Whitespace carries the structure.</p>
-  </section>
+<hr>
 
-  <section>
-    <h2>Principles</h2>
-    <ol>
-      <li>One font, one size. IBM Plex Mono at 1rem everywhere.</li>
-      <li>Opacity creates hierarchy — 100% primary, 70% secondary. Both pass WCAG AAA.</li>
-      <li>Stone palette by default. Swap for zinc, slate, or neutral.</li>
-      <li>No shadows, gradients, or decorative borders.</li>
-      <li>System dark mode. No JavaScript.</li>
-    </ol>
-  </section>
+<section>
+  <p>WHAT IT IS</p>
+  <p>A design system built on a single constraint: everything is the same. One font, one size, one weight, one color. IBM Plex Mono at 1rem throughout. No type scale, no bold, no italic, no opacity.</p>
+  <p>Hierarchy comes from arrangement. Blank lines, indentation, ALL-CAPS labels, and ASCII punctuation do the work that typographic variation usually does.</p>
+  <p>The stone palette by default. Two colors: stone-50 and stone-950, swapped for dark mode via prefers-color-scheme. No JavaScript, no toggle.</p>
+</section>
 
-  <section>
-    <h2>When to use it</h2>
-    <p class="muted">Invoke this skill when someone asks for a minimal, simple, clean, stark, or monospace design. Also when they say things like:</p>
-    <ul>
-      <li>keep it simple</li>
-      <li>nothing fancy</li>
-      <li>just make it clean</li>
-      <li>strip it back</li>
-      <li>developer aesthetic</li>
-      <li>text-first</li>
-      <li>no frills</li>
-    </ul>
-    <p class="muted" style="margin-top:1rem">Works well for documentation, dev tools, CLIs, portfolios, dashboards, and landing pages where clarity matters more than decoration.</p>
-  </section>
+<section>
+  <p>PRINCIPLES</p>
+  <ol>
+    <li>One font, one size, one weight. IBM Plex Mono, 1rem, 400.</li>
+    <li>No opacity. Every character is the same brightness.</li>
+    <li>No bold, no italic. No typographic variation of any kind.</li>
+    <li>Stone palette. Two colors only.</li>
+    <li>Structure from spacing, not styling.</li>
+  </ol>
+</section>
 
-  <section>
-    <h2>Typography</h2>
-    <p>The text you are reading is the demonstration. IBM Plex Mono at 1rem, line-height 1.6. This paragraph is primary text — full opacity.</p>
-    <p class="muted">This paragraph is secondary text — opacity 70%. It passes WCAG AAA in both light and dark mode (7.5:1 and 9.3:1 respectively). Use it for supporting content, descriptions, and metadata.</p>
-    <p><em class="muted">Italic at 70% opacity for captions, asides, and annotations.</em></p>
-    <dl>
-      <dt>font-weight: 500</dt>
-      <dd>Headings, labels, section titles. Medium weight only — no bold.</dd>
-      <dt>font-weight: 400</dt>
-      <dd>Body text, the default for everything else.</dd>
-      <dt>opacity: 0.7</dt>
-      <dd>Secondary text. The only opacity step for readable text.</dd>
-    </dl>
-  </section>
+<section>
+  <p>WHEN TO USE IT</p>
+  <p>Invoke when someone asks for a minimal, simple, clean, stark, monospace, terminal, typewriter, or ASCII design. Also on: "keep it simple", "nothing fancy", "strip it back", "developer aesthetic", "text-first", "no frills".</p>
+  <p>Works well for documentation, dev tools, CLIs, portfolios, dashboards, and any interface where the content should speak for itself.</p>
+</section>
 
-  <section>
-    <h2>Install</h2>
-    <p class="muted">Works with OpenCode, Claude Code, Cursor, Copilot, and any agent supporting the <a href="https://agentskills.io">Agent Skills</a> spec.</p>
-    <pre>npx skills add zeke/minimalist-design-skill</pre>
-    <p class="muted" style="margin-top:1rem">Source: <a href="https://github.com/zeke/minimalist-design-skill">github.com/zeke/minimalist-design-skill</a></p>
-  </section>
+<section>
+  <p>TYPOGRAPHY</p>
+  <p>The text you are reading is the demonstration. IBM Plex Mono at 1rem. This is 400 weight normal. There is no other kind of text in this system.</p>
+  <p>Section headings are ALL-CAPS plain text followed by a blank line. They look different because of convention, not CSS.</p>
+  <dl>
+    <div><dt>font</dt><dd>IBM Plex Mono</dd></div>
+    <div><dt>size</dt><dd>1rem (16px)</dd></div>
+    <div><dt>weight</dt><dd>400</dd></div>
+    <div><dt>line-height</dt><dd>1.6</dd></div>
+    <div><dt>italic</dt><dd>no</dd></div>
+    <div><dt>opacity</dt><dd>no</dd></div>
+  </dl>
+</section>
+
+<section>
+  <p>INSTALL</p>
+  <p>Works with OpenCode, Claude Code, Cursor, Copilot, and any agent supporting the Agent Skills spec (agentskills.io).</p>
+  <pre>npx skills add zeke/minimalist-design-skill</pre>
+  <p style="margin-top: 1rem">Source: <a href="https://github.com/zeke/minimalist-design-skill">github.com/zeke/minimalist-design-skill</a></p>
+</section>
 
 </body>
 </html>

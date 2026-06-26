@@ -8,131 +8,100 @@ How to apply the minimalist design system to new and existing pages.
 
 Give the model this context up front:
 
-> Use the minimalist-design skill. IBM Plex Mono, one font size (1rem), stone palette, opacity for hierarchy, dark/light via prefers-color-scheme. No shadows, no gradients, no large rounded corners.
+> Use the minimalist-design skill. IBM Plex Mono, 1rem, 400 weight, no opacity, no italic, stone palette, prefers-color-scheme dark mode. No decoration. Structure from spacing and ALL-CAPS section headings only.
 
-Then describe the page content. The model should reach for `components.md` for paste-ready snippets.
+Then describe the content. The model should reach for `components.md` for paste-ready patterns.
 
 ---
 
 ## Auditing an existing page
 
-Work through these steps in order:
+Work through these steps in order.
 
 ### 1. Check the font
 
-- Is `IBM Plex Mono` loaded from Google Fonts?
-- Is it applied via `* { font-family: ... }` or a Tailwind base style?
-- Are there any elements overriding the font (e.g., `font-sans` utility classes)?
+- Is IBM Plex Mono loaded from Google Fonts (400 only)?
+- Is it applied globally via `html { font-family: ... }`?
+- Are there any overrides elsewhere (`font-sans`, `font-serif`)?
 
-Fix: add the `<link>` tag and the `*` override from `tailwind-config.md`.
+Fix: load only `IBM+Plex+Mono` (no weight or style params) and set `* { font-family: inherit }`.
 
 ### 2. Collapse the type scale
 
-- Search for `text-xs`, `text-sm`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, etc.
-- Remove all of them. Size is `1rem` everywhere.
-- Search for `font-bold` — replace with `font-medium`.
-- Search for `font-semibold` — replace with `font-medium`.
+Search for and remove:
+- `text-xs`, `text-sm`, `text-lg`, `text-xl`, `text-2xl`, etc.
+- `font-bold`, `font-semibold`, `font-medium`
+- `italic`, `font-style: italic`
+- `letter-spacing`, `text-transform` (except ALL-CAPS section labels)
 
-### 3. Collapse the color palette
+Everything becomes `font-size: 1rem`, `font-weight: 400`, `font-style: normal`.
 
-- Search for any non-stone color classes (`blue-`, `indigo-`, `purple-`, `pink-`, `green-`, etc.).
-- Remove all of them unless they serve a semantic purpose (error = red, warning = amber).
-- Replace color-based emphasis (`text-gray-400`) with opacity-based emphasis (`opacity-70`). Do not use `opacity-60` or lower — it fails WCAG AA for normal text in light mode.
-
-Correct pattern:
-```html
-<!-- before -->
-<p class="text-gray-400">Secondary text</p>
-
-<!-- after -->
-<p class="opacity-70">Secondary text</p>
-```
-
-### 4. Fix dark mode coverage
-
-Every `bg-*`, `text-*`, `border-*`, and `divide-*` class needs a `dark:` counterpart:
-
-```html
-<!-- before -->
-<div class="bg-white text-gray-900 border-gray-200">
-
-<!-- after -->
-<div class="bg-stone-50 text-stone-950 dark:bg-stone-950 dark:text-stone-50 border-stone-200 dark:border-stone-800">
-```
-
-`opacity-70` works in both modes — no dark variant needed. It achieves AAA contrast (7.5:1 light, 9.3:1 dark).
-
-### 5. Remove decoration
+### 3. Remove opacity
 
 Search for and remove:
-- `shadow-*` (except `shadow-none`) — remove all decorative shadows
-- `rounded-xl`, `rounded-2xl`, `rounded-3xl`, `rounded-full` on non-pill elements — replace with `rounded` or `rounded-md`
-- `bg-gradient-*` — remove gradients
-- `ring-*` — remove decorative rings (keep focus rings)
-- `drop-shadow-*` — remove
+- `opacity-*` on any element
+- `text-stone-400`, `text-stone-500`, `text-stone-600` — muted color variants
+- `text-gray-400`, `text-zinc-500`, or any lighter-shade text color
+- `placeholder:opacity-*`
 
-### 6. Fix spacing
+Replace structural opacity with spacing. If something was muted to signal it was secondary, consider whether it needs to be on the page at all. If it does, leave it at full brightness.
 
-Ensure sections breathe:
-- Section padding: `py-16` minimum, `py-24` for hero
-- Between text blocks: `space-y-6` or `mb-6`
-- Cards: `p-6` internal padding
-- Nav: `h-14` height, `gap-8` between links
+### 4. Remove decoration
 
-### 7. Constrain line length
+Search for and remove:
+- `shadow-*` (all decorative shadows)
+- `rounded-xl`, `rounded-2xl`, `rounded-full` — remove or reduce to `rounded` at most
+- `bg-gradient-*`, `from-*`, `to-*`
+- `ring-*` (decorative rings, keep focus rings)
+- `border` classes used decoratively — keep only functional borders (inputs, `<hr>`, tables)
+- `bg-stone-100`, `bg-stone-900`, `bg-white` — surface tints that aren't the base bg
 
-Body prose should not exceed `max-w-3xl` (48rem). Wide layouts (data tables, dashboards) can use `max-w-5xl`.
+### 5. Fix dark mode
 
-```html
-<main class="max-w-3xl mx-auto px-6 md:px-8">
+Only two tokens needed:
+```css
+:root { --bg: #FAFAF9; --text: #0C0A09; }
+@media (prefers-color-scheme: dark) { :root { --bg: #0C0A09; --text: #FAFAF9; } }
 ```
 
-### 8. Fix text alignment
+In Tailwind: every `bg-stone-50` needs `dark:bg-stone-950` and every `text-stone-950` needs `dark:text-stone-50`. Nothing else.
 
-- Body text: left-aligned (`text-left`, which is default)
-- Center-aligned text only for single-line labels inside constrained containers (buttons, badges, nav items)
-- Never center multi-line prose
+### 6. Replace visual hierarchy with spatial hierarchy
+
+Old pattern (typographic):
+```html
+<h2 class="text-xl font-semibold text-stone-900">Section</h2>
+<p class="text-stone-500">Description here.</p>
+```
+
+New pattern (spatial):
+```html
+<p>SECTION</p>
+<p style="margin-top: 1rem">Description here.</p>
+```
+
+Use blank lines (margin) and ALL-CAPS labels to create hierarchy, not font variation.
 
 ---
 
 ## Pre-ship checklist
 
-Before calling a page done, verify:
+Before calling a page done:
 
-- [ ] IBM Plex Mono loads from Google Fonts
-- [ ] `*` font override is in place
-- [ ] No `text-sm`, `text-xs`, `text-lg`, `text-xl` etc. — size is uniform
-- [ ] No `font-bold` or `font-semibold` — max is `font-medium`
-- [ ] No non-stone colors (except red/amber for semantic states)
-- [ ] Text hierarchy expressed via `opacity-70` (secondary) — not color changes
-- [ ] No `opacity-60` or lower on body text — fails WCAG AA in light mode
-- [ ] `opacity-50` used only for non-text elements (placeholders, icons, decorative dividers)
-- [ ] Every `bg-*` has a `dark:bg-*`
-- [ ] Every `text-*` has a `dark:text-*`
-- [ ] Every `border-*` has a `dark:border-*`
-- [ ] No decorative `shadow-*`
-- [ ] No `rounded-xl` or larger (use `rounded` or `rounded-md`)
-- [ ] No gradients
-- [ ] Content width constrained: `max-w-3xl` or `max-w-5xl`
-- [ ] Section padding is at least `py-16`
-- [ ] Body text is left-aligned
+- [ ] IBM Plex Mono loads from Google Fonts (400 only)
+- [ ] No `font-weight` other than 400
+- [ ] No `font-style: italic`
+- [ ] No opacity on any element
+- [ ] No muted color variants (`text-stone-400`, etc.)
+- [ ] No `text-sm`, `text-xs`, `text-lg`, `text-xl`, etc.
+- [ ] Only two background colors: stone-50 (light) and stone-950 (dark)
+- [ ] No surface tints, no card backgrounds different from page background
+- [ ] No decorative shadows or gradients
+- [ ] No decorative borders (keep functional ones: inputs, hr, tables)
+- [ ] Section headings are ALL-CAPS plain text, no special styling
+- [ ] Content width constrained (640px or similar)
 - [ ] Page tested in light mode
-- [ ] Page tested in dark mode (toggle via browser devtools or system setting)
-
----
-
-## Accent color decision guide
-
-The system is monochrome by default. Add an accent only when the user explicitly asks or when a UI genuinely needs a focal point (e.g., a primary CTA on a marketing page).
-
-Rules for accents:
-1. One accent color per page, maximum
-2. Use it on at most 1-2 elements (primary button, active nav item)
-3. Pick a color from a single Tailwind scale (e.g., `sky-500`)
-4. Always pair with a dark mode variant (`dark:sky-400`)
-5. Never use the accent for text decoration (underlines, italics)
-
-If in doubt, skip the accent. The default monochrome works.
+- [ ] Page tested in dark mode
 
 ---
 
@@ -140,11 +109,10 @@ If in doubt, skip the accent. The default monochrome works.
 
 | Mistake | Fix |
 | --- | --- |
-| Using `text-stone-400` for muted text | Use `opacity-70` instead |
-| `font-bold` on headings | Use `font-medium` |
-| `text-xl` or larger for headings | Remove — all text is `1rem` |
-| `rounded-2xl` on cards | Use `rounded` (4px) or remove entirely |
-| Forgetting `dark:` on `border-*` | Add `dark:border-stone-800` |
-| Multiple font sizes in one component | Flatten to `1rem` for all |
-| Using blue links | Use `opacity-70` + `hover:opacity-100` |
-| Shadow on cards | Remove — use border instead |
+| `opacity-70` on secondary text | Remove. Everything is full brightness. |
+| `font-medium` on headings | Remove. 400 weight everywhere. |
+| `text-stone-500` for muted text | Remove. Use full-brightness text or cut the content. |
+| `bg-stone-100` on cards | Remove. No surface tints. |
+| `italic` for captions | Remove. No italic. |
+| Two-level heading hierarchy | Use ALL-CAPS labels + spacing instead. |
+| `border` on cards | Remove unless it's a functional input border or `<hr>`. |

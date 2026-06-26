@@ -1,112 +1,115 @@
 ---
 name: minimalist-design
 description: >
-  Apply a minimalist monospace design system using IBM Plex Mono, a single
-  font size, monochromatic stone palette, and opacity-based text hierarchy.
+  Apply a minimalist monospace design system using IBM Plex Mono at a single
+  size with ASCII-style structure. No opacity, no weight variation, no type
+  scale. Hierarchy comes from spacing, indentation, and ASCII punctuation.
   Use this skill when the user asks for a minimal, minimalist, simple, clean,
-  stark, bare, understated, monospace, or typographic design. Also invoke when
-  the user says things like "keep it simple", "nothing fancy", "just make it
-  clean", "strip it back", "plain design", "no frills", "utilitarian", "raw",
-  "text-first", or "developer aesthetic". Use for dashboards, documentation
-  sites, dev tools, CLIs, portfolios, landing pages, or any interface where
-  clarity and restraint are valued over decoration.
+  stark, bare, understated, monospace, ASCII, terminal, typewriter, or
+  typographic design. Also invoke when the user says things like "keep it
+  simple", "nothing fancy", "just make it clean", "strip it back", "plain
+  design", "no frills", "utilitarian", "raw", "text-first", or "developer
+  aesthetic". Use for documentation, dev tools, CLIs, portfolios, landing
+  pages, or any interface where clarity and restraint are valued over
+  decoration.
 license: MIT
 metadata:
   author: zeke
-  version: "1.0"
+  version: "2.0"
 ---
 
 ## Core principles
 
-1. **One font, one size.** IBM Plex Mono everywhere, `1rem` (16px) throughout. No type scale. Size conveys nothing; weight and opacity do.
-2. **Opacity creates hierarchy.** Primary text at full opacity, secondary at 70%. Never change the hue to de-emphasize. Both levels pass WCAG AA in light and dark mode.
-3. **Stone by default.** Use Tailwind's `stone` palette. Light mode: `stone-950` text on `stone-50` background. Dark mode: `stone-50` text on `stone-950` background. Honor `prefers-color-scheme` with no JavaScript.
-4. **No decoration.** No shadows, no gradients, no rounded corners unless functional. Borders only when they carry meaning. Whitespace is the structure.
-5. **Swappable palette.** The user can substitute any single-hue Tailwind scale (slate, zinc, neutral, gray) for stone. Keep it monochromatic — no mixing scales.
+1. **One font, one size, one weight.** IBM Plex Mono at 1rem / 400 weight everywhere. No type scale, no bold, no italic.
+2. **No opacity.** Every character is the same brightness. Hierarchy comes from arrangement — blank lines, indentation, `---` dividers, ASCII punctuation.
+3. **Stone by default.** `stone-950` on `stone-50` in light mode, reversed in dark. Honor `prefers-color-scheme` with no JavaScript.
+4. **No decoration.** No shadows, gradients, rounded corners, or borders unless functionally necessary. Whitespace is the structure.
+5. **Swappable palette.** Substitute any single-hue Tailwind scale (slate, zinc, neutral, gray). Never mix scales.
 
 ## Typography
 
 ```css
 font-family: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
-font-size: 1rem;      /* 16px — the only size */
-line-height: 1.6;     /* comfortable reading */
-font-weight: 400;     /* normal body */
+font-size: 1rem;    /* 16px — the only size */
+font-weight: 400;   /* the only weight */
+line-height: 1.6;
+font-style: normal; /* no italic */
 ```
 
 Load from Google Fonts:
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
 ```
 
-Weight usage:
-- `font-normal` (400) — body text, labels, most UI
-- `font-medium` (500) — headings, emphasis, interactive labels
-- `font-normal italic` — captions, asides, inline annotations
+Only one variant is needed: 400 normal. Do not load 500 or italic.
 
-## Opacity ladder
+## Structure
 
-Two levels only. Both pass WCAG AA for normal text in light and dark mode.
+Hierarchy comes from ASCII conventions, not typographic variation:
 
-| Role           | Tailwind class   | Opacity | Min contrast (light / dark) |
-| -------------- | ---------------- | ------- | --------------------------- |
-| Primary text   | (none / default) | 100%    | 18.9:1 / 18.9:1 — AAA      |
-| Secondary text | `opacity-70`     | 70%     | 7.5:1 / 9.3:1 — AAA        |
+```
+Page title          <- first line, nothing special
+Tagline             <- second line, nothing special
 
-For non-text UI elements only (borders, icons, decorative dividers) where WCAG does not require 4.5:1:
+---
 
-| Role                     | Tailwind class | Opacity | Min contrast (light / dark) |
-| ------------------------ | -------------- | ------- | --------------------------- |
-| Placeholder / hint text  | `opacity-50`   | 50%     | 3.7:1 / 5.2:1 — AA-large   |
+SECTION HEADING     <- all-caps, preceded by blank line
 
-Do not use `opacity-50` or lower for body text. Do not use `opacity-25` or `opacity-35` — they fail WCAG AA in light mode.
+Body text flows here as paragraphs separated by blank lines.
 
-Apply opacity to text and icons only. Never use opacity as the sole means of conveying state on interactive elements.
+  Indented content suggests subordination or a code example.
+
+- bullet list item
+- another item
+
+key    value         <- two-space-aligned columns for key/value pairs
+```
+
+Section headings are ALL-CAPS text followed by a blank line. No `<h2>` styling, no border, no color. Visually distinct through convention, not CSS.
 
 ## Color
 
-Light mode (default):
+Light mode:
 ```
-background: stone-50   (#FAFAF9)
-surface:    stone-100  (#F5F5F4)
-border:     stone-200  (#E7E5E4)
-text:       stone-950  (#0C0A09)
+background: #FAFAF9   (stone-50)
+text:       #0C0A09   (stone-950)
 ```
 
 Dark mode (`prefers-color-scheme: dark`):
 ```
-background: stone-950  (#0C0A09)
-surface:    stone-900  (#1C1917)
-border:     stone-800  (#292524)
-text:       stone-50   (#FAFAF9)
+background: #0C0A09   (stone-950)
+text:       #FAFAF9   (stone-50)
 ```
 
-No accent color by default. If the user requests one, use a single hue at `stone-900` / `stone-100` equivalent weight — or pick a contrast color from a separate Tailwind scale (e.g. `sky-500`), used sparingly.
+Two colors only. No surface tints, no border colors, no opacity variants.
 
 ## Layout
 
-- Max content width: `max-w-3xl` (48rem) for prose, `max-w-5xl` for wide layouts
-- Padding: `px-6` on mobile, `px-8` on md+
-- Vertical rhythm: `space-y-6` between sections, `py-16` for section padding
-- No multi-column layouts unless the content is genuinely tabular
-- Align everything to a left edge — centered text only for single-line labels
+```css
+max-width: 640px;
+margin: 0 auto;
+padding: 3rem 1.5rem 6rem;
+```
+
+Single column. Left-aligned. No grid, no flexbox for layout (flexbox is fine for inline alignment). Line length naturally constrained by `max-width`.
 
 ## What NOT to do
 
-- No `text-2xl`, `text-3xl`, etc. — size is fixed at `1rem`
-- No `font-bold` — use `font-medium` at most
-- No color other than the stone scale (unless user explicitly requests an accent)
-- No `rounded-xl`, `rounded-2xl` — use `rounded` (4px) or `rounded-md` (6px) at most, only for inputs and buttons
-- No `shadow-lg`, `shadow-xl`, or decorative shadows
-- No gradients
-- No background images or patterns
+- No `font-weight` other than 400
+- No `font-style: italic`
+- No `opacity` on any element
+- No `text-xl`, `text-2xl`, etc.
+- No `font-bold`, `font-medium`, `font-semibold`
+- No `text-gray-400`, `text-stone-500`, or any muted color variant
+- No `shadow-*`, `rounded-*`, or `gradient-*`
+- No background colors other than the base bg token
+- No borders as decoration — only as functional separators (e.g., `<hr>`)
 
 ## References
 
-Load these on demand for more detail:
-
-- [design-system.md](references/design-system.md) — CSS custom properties, full token table, dark mode implementation
-- [components.md](references/components.md) — paste-ready Tailwind HTML for nav, hero, buttons, cards, forms, tables, code blocks
-- [tailwind-config.md](references/tailwind-config.md) — Tailwind v3 config and v4 `@theme` block
-- [prompting.md](references/prompting.md) — audit checklist for applying this system to existing pages
+- [design-system.md](references/design-system.md) — CSS tokens, color values, dark mode
+- [components.md](references/components.md) — paste-ready HTML patterns
+- [tailwind-config.md](references/tailwind-config.md) — Tailwind v3/v4 config
+- [prompting.md](references/prompting.md) — audit checklist for existing pages
