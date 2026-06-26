@@ -19,7 +19,7 @@ metadata:
 ## Core principles
 
 1. **One font, one size.** IBM Plex Mono everywhere, `1rem` (16px) throughout. No type scale. Size conveys nothing; weight and opacity do.
-2. **Opacity creates hierarchy.** Primary text at full opacity, secondary at 60%, tertiary/disabled at 35%. Never change the hue to de-emphasize.
+2. **Opacity creates hierarchy.** Primary text at full opacity, secondary at 70%. Never change the hue to de-emphasize. Both levels pass WCAG AA in light and dark mode.
 3. **Stone by default.** Use Tailwind's `stone` palette. Light mode: `stone-950` text on `stone-50` background. Dark mode: `stone-50` text on `stone-950` background. Honor `prefers-color-scheme` with no JavaScript.
 4. **No decoration.** No shadows, no gradients, no rounded corners unless functional. Borders only when they carry meaning. Whitespace is the structure.
 5. **Swappable palette.** The user can substitute any single-hue Tailwind scale (slate, zinc, neutral, gray) for stone. Keep it monochromatic — no mixing scales.
@@ -47,14 +47,22 @@ Weight usage:
 
 ## Opacity ladder
 
-| Role             | Tailwind class  | Opacity |
-| ---------------- | --------------- | ------- |
-| Primary text     | (none / default) | 100%   |
-| Secondary text   | `opacity-60`    | 60%     |
-| Tertiary / hint  | `opacity-35`    | 35%     |
-| Disabled         | `opacity-25`    | 25%     |
+Two levels only. Both pass WCAG AA for normal text in light and dark mode.
 
-Apply to text only. Never apply opacity to interactive elements in a way that hides their state.
+| Role           | Tailwind class   | Opacity | Min contrast (light / dark) |
+| -------------- | ---------------- | ------- | --------------------------- |
+| Primary text   | (none / default) | 100%    | 18.9:1 / 18.9:1 — AAA      |
+| Secondary text | `opacity-70`     | 70%     | 7.5:1 / 9.3:1 — AAA        |
+
+For non-text UI elements only (borders, icons, decorative dividers) where WCAG does not require 4.5:1:
+
+| Role                     | Tailwind class | Opacity | Min contrast (light / dark) |
+| ------------------------ | -------------- | ------- | --------------------------- |
+| Placeholder / hint text  | `opacity-50`   | 50%     | 3.7:1 / 5.2:1 — AA-large   |
+
+Do not use `opacity-50` or lower for body text. Do not use `opacity-25` or `opacity-35` — they fail WCAG AA in light mode.
+
+Apply opacity to text and icons only. Never use opacity as the sole means of conveying state on interactive elements.
 
 ## Color
 

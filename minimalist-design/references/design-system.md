@@ -57,20 +57,32 @@ body {
 
 Opacity is the only tool for text hierarchy. Never change the stone hue to de-emphasize text.
 
-| Role             | CSS                       | Tailwind                     |
-| ---------------- | ------------------------- | ---------------------------- |
-| Primary          | `opacity: 1`              | (no class needed)            |
-| Secondary        | `opacity: 0.6`            | `opacity-60`                 |
-| Tertiary / hint  | `opacity: 0.35`           | `opacity-35`                 |
-| Disabled         | `opacity: 0.25`           | `opacity-25`                 |
+Two levels for readable text — both pass WCAG AA (4.5:1) for normal text in both light and dark mode:
 
-Example — a card with a title, subtitle, and hint:
+| Role           | CSS             | Tailwind         | Light contrast | Dark contrast |
+| -------------- | --------------- | ---------------- | -------------- | ------------- |
+| Primary        | `opacity: 1`    | (none)           | 18.9:1 (AAA)   | 18.9:1 (AAA)  |
+| Secondary      | `opacity: 0.7`  | `opacity-70`     | 7.5:1 (AAA)    | 9.3:1 (AAA)   |
+
+For non-text elements only (borders, icons, decorative dividers) where WCAG 3:1 UI component threshold applies:
+
+| Role        | CSS             | Tailwind       | Light contrast | Dark contrast  |
+| ----------- | --------------- | -------------- | -------------- | -------------- |
+| Placeholder | `opacity: 0.5`  | `opacity-50`   | 3.7:1          | 5.2:1          |
+
+Do not use `opacity-60`, `opacity-35`, `opacity-25`, or lower for body text — `opacity-60` passes in dark mode but fails AA in light mode (5.2:1 is fine for large/bold but not normal body text at the strictest reading). Use `opacity-70` as the floor for all readable text.
+
+Example — a card with a title and description:
 ```html
 <div>
   <p>Primary label</p>
-  <p class="opacity-60">Secondary description</p>
-  <p class="opacity-35">Optional hint text</p>
+  <p class="opacity-70">Secondary description</p>
 </div>
+```
+
+Example — an input with placeholder:
+```html
+<input placeholder="hint text" class="placeholder:opacity-50">
 ```
 
 ## Typography

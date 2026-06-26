@@ -37,7 +37,7 @@ Fix: add the `<link>` tag and the `*` override from `tailwind-config.md`.
 
 - Search for any non-stone color classes (`blue-`, `indigo-`, `purple-`, `pink-`, `green-`, etc.).
 - Remove all of them unless they serve a semantic purpose (error = red, warning = amber).
-- Replace color-based emphasis (`text-gray-400`) with opacity-based emphasis (`opacity-60`).
+- Replace color-based emphasis (`text-gray-400`) with opacity-based emphasis (`opacity-70`). Do not use `opacity-60` or lower — it fails WCAG AA for normal text in light mode.
 
 Correct pattern:
 ```html
@@ -45,7 +45,7 @@ Correct pattern:
 <p class="text-gray-400">Secondary text</p>
 
 <!-- after -->
-<p class="opacity-60">Secondary text</p>
+<p class="opacity-70">Secondary text</p>
 ```
 
 ### 4. Fix dark mode coverage
@@ -60,7 +60,7 @@ Every `bg-*`, `text-*`, `border-*`, and `divide-*` class needs a `dark:` counter
 <div class="bg-stone-50 text-stone-950 dark:bg-stone-950 dark:text-stone-50 border-stone-200 dark:border-stone-800">
 ```
 
-Opacity classes (`opacity-60`, `opacity-35`) work in both modes — no dark variant needed.
+`opacity-70` works in both modes — no dark variant needed. It achieves AAA contrast (7.5:1 light, 9.3:1 dark).
 
 ### 5. Remove decoration
 
@@ -104,7 +104,9 @@ Before calling a page done, verify:
 - [ ] No `text-sm`, `text-xs`, `text-lg`, `text-xl` etc. — size is uniform
 - [ ] No `font-bold` or `font-semibold` — max is `font-medium`
 - [ ] No non-stone colors (except red/amber for semantic states)
-- [ ] Hierarchy expressed via `opacity-60`, `opacity-35` not color changes
+- [ ] Text hierarchy expressed via `opacity-70` (secondary) — not color changes
+- [ ] No `opacity-60` or lower on body text — fails WCAG AA in light mode
+- [ ] `opacity-50` used only for non-text elements (placeholders, icons, decorative dividers)
 - [ ] Every `bg-*` has a `dark:bg-*`
 - [ ] Every `text-*` has a `dark:text-*`
 - [ ] Every `border-*` has a `dark:border-*`
@@ -138,11 +140,11 @@ If in doubt, skip the accent. The default monochrome works.
 
 | Mistake | Fix |
 | --- | --- |
-| Using `text-stone-400` for muted text | Use `opacity-60` instead |
+| Using `text-stone-400` for muted text | Use `opacity-70` instead |
 | `font-bold` on headings | Use `font-medium` |
 | `text-xl` or larger for headings | Remove — all text is `1rem` |
 | `rounded-2xl` on cards | Use `rounded` (4px) or remove entirely |
 | Forgetting `dark:` on `border-*` | Add `dark:border-stone-800` |
 | Multiple font sizes in one component | Flatten to `1rem` for all |
-| Using blue links | Use `opacity-60` + `hover:opacity-100` |
+| Using blue links | Use `opacity-70` + `hover:opacity-100` |
 | Shadow on cards | Remove — use border instead |
