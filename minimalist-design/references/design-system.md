@@ -7,14 +7,14 @@
   --font: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
   --font-size: 1rem;
   --line-height: 1.6;
-  --bg:   #FAFAF9;   /* stone-50  */
-  --text: #0C0A09;   /* stone-950 */
+  --bg:   #E7E5E4;   /* stone-200 */
+  --text: #44403C;   /* stone-700 */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:   #0C0A09;  /* stone-950 */
-    --text: #FAFAF9;  /* stone-50  */
+    --bg:   #44403C;  /* stone-700 */
+    --text: #E7E5E4;  /* stone-200 */
   }
 }
 
@@ -35,12 +35,12 @@ Two colors only. No opacity variants, no surface tints, no border palette.
 
 ## Stone color values
 
-| Token     | Hex       | Role       |
-| --------- | --------- | ---------- |
-| stone-50  | #FAFAF9   | Light bg / Dark text |
-| stone-950 | #0C0A09   | Light text / Dark bg |
+| Token     | Hex       | Role                 |
+| --------- | --------- | -------------------- |
+| stone-200 | #E7E5E4   | Light bg / Dark text |
+| stone-700 | #44403C   | Light text / Dark bg |
 
-That is the entire palette. No intermediate steps.
+Contrast: 8.18:1 (WCAG AAA). That is the entire palette. No intermediate steps.
 
 ## Dark mode
 
