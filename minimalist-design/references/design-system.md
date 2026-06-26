@@ -7,14 +7,14 @@
   --font: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
   --font-size: 1rem;
   --line-height: 1.6;
-  --bg:   #E7E5E4;   /* stone-200 */
+  --bg:   #F5F5F4;   /* stone-100 */
   --text: #44403C;   /* stone-700 */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg:   #44403C;  /* stone-700 */
-    --text: #E7E5E4;  /* stone-200 */
+    --text: #F5F5F4;  /* stone-100 */
   }
 }
 
@@ -37,10 +37,10 @@ Two colors only. No opacity variants, no surface tints, no border palette.
 
 | Token     | Hex       | Role                 |
 | --------- | --------- | -------------------- |
-| stone-200 | #E7E5E4   | Light bg / Dark text |
+| stone-100 | #F5F5F4   | Light bg / Dark text |
 | stone-700 | #44403C   | Light text / Dark bg |
 
-Contrast: 8.18:1 (WCAG AAA). That is the entire palette. No intermediate steps.
+Contrast: 9.42:1 (WCAG AAA). That is the entire palette. No intermediate steps.
 
 ## Dark mode
 
