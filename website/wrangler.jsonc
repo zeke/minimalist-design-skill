@@ -2,8 +2,8 @@
   "name": "minimal-ziki",
   "main": "worker.js",
   "compatibility_date": "2025-06-25",
+  "workers_dev": true,
   "routes": [
-    { "pattern": "minimal.ziki.boo/*", "zone_name": "ziki.boo" },
-    { "pattern": "minimal.ziki.workers.dev/*", "zone_name": "ziki.workers.dev" }
+    { "pattern": "minimal.ziki.boo/*", "zone_name": "ziki.boo" }
   ]
 }
