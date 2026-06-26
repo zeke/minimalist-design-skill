@@ -39,14 +39,18 @@
     hr {
       border: none;
       border-top: 1px solid currentColor;
+      opacity: 0.2;
       margin: 3rem 0;
     }
 
     pre {
       margin-top: 1rem;
-      padding: 1rem;
-      border: 1px solid currentColor;
       overflow-x: auto;
+    }
+
+    .cmd::before {
+      content: '$ ';
+      user-select: none;
     }
 
     a { color: inherit; }
@@ -104,7 +108,7 @@
 <section>
   <p>INSTALL</p>
   <p>Works with OpenCode, Claude Code, Cursor, Copilot, and any agent supporting the Agent Skills spec (agentskills.io).</p>
-  <pre>npx skills add zeke/minimalist-design-skill</pre>
+  <pre class="cmd">npx skills add zeke/minimalist-design-skill</pre>
   <p style="margin-top: 1rem">Source: <a href="https://github.com/zeke/minimalist-design-skill">github.com/zeke/minimalist-design-skill</a></p>
 </section>
 
