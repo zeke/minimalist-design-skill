@@ -41,7 +41,7 @@ The skill provides:
 
 ## Demo
 
-[minimal.ziki.boo](https://minimal.ziki.boo)
+[minimal.ziki.workers.dev](https://minimal.ziki.workers.dev)
 
 ## What's included
 

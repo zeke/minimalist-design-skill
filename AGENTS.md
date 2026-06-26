@@ -12,7 +12,7 @@ minimalist-design/       the installable skill (copy this to your skills dir)
     components.md        paste-ready Tailwind HTML snippets
     tailwind-config.md   Tailwind v3/v4 configs, CDN setup
     prompting.md         audit checklist, common mistakes
-website/                 demo site deployed to minimal.ziki.boo
+website/                 demo site deployed to minimal.ziki.workers.dev
   index.html             self-contained demo page
   wrangler.jsonc         Cloudflare Worker deployment config
   worker.js              Worker that serves index.html
@@ -40,7 +40,7 @@ cd website
 npx wrangler deploy
 ```
 
-The site deploys to `minimal.ziki.workers.dev` and is routed to `minimal.ziki.boo`.
+The site deploys to `minimal.ziki.workers.dev`.
 
 ## Update this file
 
