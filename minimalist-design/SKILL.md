@@ -21,7 +21,7 @@ metadata:
 ## Core principles
 
 1. **One font, one size, one weight.** IBM Plex Mono at 1rem / 400 weight everywhere. No type scale, no bold, no italic.
-2. **No opacity.** Every character is the same brightness. Hierarchy comes from arrangement — blank lines, indentation, `---` dividers, ASCII punctuation.
+2. **Opacity sparingly.** Every character is the same brightness by default. Use opacity only where it genuinely helps — faint dividers, unselectable prompt characters. Not for text hierarchy.
 3. **Stone by default.** `stone-950` on `stone-50` in light mode, reversed in dark. Honor `prefers-color-scheme` with no JavaScript.
 4. **No decoration.** No shadows, gradients, rounded corners, or borders unless functionally necessary. Whitespace is the structure.
 5. **Swappable palette.** Substitute any single-hue Tailwind scale (slate, zinc, neutral, gray). Never mix scales.
@@ -99,7 +99,8 @@ Single column. Left-aligned. No grid, no flexbox for layout (flexbox is fine for
 
 - No `font-weight` other than 400
 - No `font-style: italic`
-- No `opacity` on any element
+- No `opacity` for text hierarchy — use it only for decoration (dividers, prompt characters, etc.)
+- Links use underlines (`text-decoration: underline`), not color changes
 - No `text-xl`, `text-2xl`, etc.
 - No `font-bold`, `font-medium`, `font-semibold`
 - No `text-gray-400`, `text-stone-500`, or any muted color variant
