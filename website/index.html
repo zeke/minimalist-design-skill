@@ -10,13 +10,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:   #FAFAF9;
-      --text: #0C0A09;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #0C0A09; --text: #FAFAF9; }
-    }
+    :root { --bg: #FAFAF9; --text: #0C0A09; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #0C0A09; --text: #FAFAF9; } }
 
     html {
       font-family: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', monospace;
@@ -27,206 +22,105 @@
     }
 
     body {
-      max-width: 48rem;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 4rem 1.5rem 8rem;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    p + p { margin-top: 1rem; }
+    ul, ol { padding-left: 1.5rem; margin-top: 0.5rem; }
+    li + li { margin-top: 0.25rem; }
+
+    section { margin-top: 3rem; }
+
+    h2 {
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid currentColor;
+      opacity: 0.35;
     }
 
     .muted { opacity: 0.7; }
-    .faint { opacity: 0.5; }
-    .medium { font-weight: 500; }
-    .italic { font-style: italic; }
-
-    section { margin-top: 4rem; }
-    p + p { margin-top: 1rem; }
-
-    pre {
-      margin-top: 1rem;
-      padding: 1rem;
-      overflow-x: auto;
-      border: 1px solid currentColor;
-      border-opacity: 0.5;
-    }
-
-    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    th { font-weight: 500; text-align: left; padding: 0.5rem 2rem 0.5rem 0; border-bottom: 1px solid currentColor; opacity: 0.5; }
-    td { padding: 0.5rem 2rem 0.5rem 0; }
-    td.muted { opacity: 0.7; }
-
-    input, textarea {
-      display: block;
-      width: 100%;
-      margin-top: 0.5rem;
-      padding: 0.5rem 0;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid currentColor;
-      color: inherit;
-      font: inherit;
-      outline: none;
-      opacity: 0.7;
-    }
-    input:focus, textarea:focus { opacity: 1; }
-    textarea { resize: none; }
-
-    label { font-weight: 500; }
-
-    .field { margin-top: 1.5rem; }
-
-    button {
-      margin-top: 1.5rem;
-      background: none;
-      border: 1px solid currentColor;
-      color: inherit;
-      font: inherit;
-      padding: 0.5rem 1.5rem;
-      cursor: pointer;
-    }
-    button:hover { opacity: 0.7; }
-
-    hr { border: none; border-top: 1px solid currentColor; opacity: 0.15; margin-top: 4rem; }
 
     a { color: inherit; }
     a:hover { opacity: 0.7; }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6rem;
+    pre {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid currentColor;
+      opacity: 0.7;
+      overflow-x: auto;
     }
-    nav .links { display: flex; gap: 2rem; }
-    nav .links a { opacity: 0.5; }
-    nav .links a:hover { opacity: 1; }
 
-    footer { margin-top: 6rem; display: flex; justify-content: space-between; }
-    footer, footer a { opacity: 0.5; }
-    footer a:hover { opacity: 1; }
+    dl { margin-top: 0.5rem; }
+    dt { font-weight: 500; margin-top: 1rem; }
+    dd { opacity: 0.7; }
   </style>
 </head>
 <body>
 
-  <nav>
-    <span class="medium">minimalist-design</span>
-    <div class="links">
-      <a href="#principles">principles</a>
-      <a href="#components">components</a>
-      <a href="https://github.com/zeke/minimalist-design-skill">github</a>
-    </div>
-  </nav>
+  <p style="font-weight:500">minimalist-design</p>
+  <p class="muted" style="margin-top:0.25rem">An agent skill for building minimal, monospace interfaces.</p>
 
-  <p class="faint">agent skill</p>
-  <p class="medium" style="margin-top:0.5rem">One font. One size.<br>No decoration.</p>
-  <p class="muted" style="margin-top:1rem">
-    IBM Plex Mono throughout, stone palette, opacity-based hierarchy,
-    dark and light mode via <code>prefers-color-scheme</code>.
-  </p>
-
-  <pre style="margin-top:2rem">npx skills add zeke/minimalist-design-skill</pre>
-
-  <hr>
-
-  <section id="principles">
-    <p class="medium">Five principles</p>
-
-    <p style="margin-top:1.5rem"><span class="faint">01 &nbsp;</span>One font, one size. IBM Plex Mono at 1rem everywhere.</p>
-    <p><span class="faint">02 &nbsp;</span>Opacity creates hierarchy. 100% primary, 70% secondary. Both WCAG AAA.</p>
-    <p><span class="faint">03 &nbsp;</span>Stone palette by default. Swap for zinc, slate, or neutral.</p>
-    <p><span class="faint">04 &nbsp;</span>No shadows, gradients, or decorative borders.</p>
-    <p><span class="faint">05 &nbsp;</span>System dark mode. No JavaScript.</p>
-  </section>
-
-  <hr>
-
-  <section id="components">
-    <p class="medium">Typography</p>
-    <p class="muted" style="margin-top:0.25rem">Weight and opacity. Nothing else.</p>
-
-    <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.5rem;">
-      <p class="medium">font-medium — headings, labels, emphasis</p>
-      <p>font-normal — body text, default</p>
-      <p class="muted">opacity-70 — secondary text (WCAG AAA, 7.5:1 light / 9.3:1 dark)</p>
-      <p class="italic muted">italic opacity-70 — captions, asides, annotations</p>
-    </div>
+  <section>
+    <h2>What it is</h2>
+    <p>A design system that uses a single monospace font at a single size. IBM Plex Mono throughout, 1rem everywhere. No type scale. Hierarchy comes from font weight and opacity, not size.</p>
+    <p class="muted">The stone palette by default — a warm neutral gray that works in light and dark mode. Dark mode is handled entirely by <code>prefers-color-scheme</code>. No JavaScript, no toggle.</p>
+    <p class="muted">No shadows, no gradients, no decorative borders. Whitespace carries the structure.</p>
   </section>
 
   <section>
-    <p class="medium">Buttons</p>
-    <div style="margin-top:1rem; display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
-      <button style="opacity:1">primary</button>
-      <button class="muted">secondary</button>
-      <a href="#" class="muted" style="text-decoration:none">ghost →</a>
-    </div>
+    <h2>Principles</h2>
+    <ol>
+      <li>One font, one size. IBM Plex Mono at 1rem everywhere.</li>
+      <li>Opacity creates hierarchy — 100% primary, 70% secondary. Both pass WCAG AAA.</li>
+      <li>Stone palette by default. Swap for zinc, slate, or neutral.</li>
+      <li>No shadows, gradients, or decorative borders.</li>
+      <li>System dark mode. No JavaScript.</li>
+    </ol>
   </section>
 
   <section>
-    <p class="medium">Table</p>
-    <table>
-      <thead>
-        <tr>
-          <th>token</th>
-          <th>value</th>
-          <th>role</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>--bg</td>
-          <td class="muted">stone-50 / stone-950</td>
-          <td class="muted">page background</td>
-        </tr>
-        <tr>
-          <td>--text</td>
-          <td class="muted">stone-950 / stone-50</td>
-          <td class="muted">primary text</td>
-        </tr>
-        <tr>
-          <td>opacity-70</td>
-          <td class="muted">0.7</td>
-          <td class="muted">secondary text (AAA)</td>
-        </tr>
-        <tr>
-          <td>opacity-50</td>
-          <td class="muted">0.5</td>
-          <td class="muted">placeholders, icons only</td>
-        </tr>
-      </tbody>
-    </table>
+    <h2>When to use it</h2>
+    <p class="muted">Invoke this skill when someone asks for a minimal, simple, clean, stark, or monospace design. Also when they say things like:</p>
+    <ul>
+      <li>keep it simple</li>
+      <li>nothing fancy</li>
+      <li>just make it clean</li>
+      <li>strip it back</li>
+      <li>developer aesthetic</li>
+      <li>text-first</li>
+      <li>no frills</li>
+    </ul>
+    <p class="muted" style="margin-top:1rem">Works well for documentation, dev tools, CLIs, portfolios, dashboards, and landing pages where clarity matters more than decoration.</p>
   </section>
 
   <section>
-    <p class="medium">Code</p>
-    <p class="muted" style="margin-top:0.25rem">Same font, so code feels native.</p>
-    <pre>* {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 1rem;
-  line-height: 1.6;
-}</pre>
+    <h2>Typography</h2>
+    <p>The text you are reading is the demonstration. IBM Plex Mono at 1rem, line-height 1.6. This paragraph is primary text — full opacity.</p>
+    <p class="muted">This paragraph is secondary text — opacity 70%. It passes WCAG AAA in both light and dark mode (7.5:1 and 9.3:1 respectively). Use it for supporting content, descriptions, and metadata.</p>
+    <p><em class="muted">Italic at 70% opacity for captions, asides, and annotations.</em></p>
+    <dl>
+      <dt>font-weight: 500</dt>
+      <dd>Headings, labels, section titles. Medium weight only — no bold.</dd>
+      <dt>font-weight: 400</dt>
+      <dd>Body text, the default for everything else.</dd>
+      <dt>opacity: 0.7</dt>
+      <dd>Secondary text. The only opacity step for readable text.</dd>
+    </dl>
   </section>
 
   <section>
-    <p class="medium">Form</p>
-    <form onsubmit="return false" style="margin-top:1rem">
-      <div class="field">
-        <label for="name">name</label>
-        <input id="name" type="text" placeholder="your name">
-      </div>
-      <div class="field">
-        <label for="message">message</label>
-        <textarea id="message" rows="3" placeholder="say something..."></textarea>
-      </div>
-      <button type="submit">send</button>
-    </form>
+    <h2>Install</h2>
+    <p class="muted">Works with OpenCode, Claude Code, Cursor, Copilot, and any agent supporting the <a href="https://agentskills.io">Agent Skills</a> spec.</p>
+    <pre>npx skills add zeke/minimalist-design-skill</pre>
+    <p class="muted" style="margin-top:1rem">Source: <a href="https://github.com/zeke/minimalist-design-skill">github.com/zeke/minimalist-design-skill</a></p>
   </section>
-
-  <hr>
-
-  <footer>
-    <span>MIT license</span>
-    <div style="display:flex; gap:2rem;">
-      <a href="https://github.com/zeke/minimalist-design-skill">github</a>
-      <a href="https://agentskills.io">agentskills.io</a>
-    </div>
-  </footer>
 
 </body>
 </html>
