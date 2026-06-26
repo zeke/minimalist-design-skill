@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>minimalist-design — an agent skill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['IBM Plex Mono', 'ui-monospace', 'Cascadia Code', 'Fira Code', 'monospace'],
+            sans: ['IBM Plex Mono', 'ui-monospace', 'Cascadia Code', 'Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 1rem; line-height: 1.6; }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-950 dark:bg-stone-950 dark:text-stone-50">
+
+  <!-- Nav -->
+  <nav class="border-b border-stone-200 dark:border-stone-800">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex items-center justify-between h-14">
+      <a href="/" class="font-medium">minimalist-design</a>
+      <div class="flex items-center gap-6 md:gap-8">
+        <a href="#principles" class="opacity-60 hover:opacity-100 transition-opacity hidden sm:block">principles</a>
+        <a href="#components" class="opacity-60 hover:opacity-100 transition-opacity hidden sm:block">components</a>
+        <a href="https://github.com/zeke/minimalist-design-skill" class="opacity-60 hover:opacity-100 transition-opacity">github</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 py-24">
+    <p class="opacity-35 mb-3">agent skill</p>
+    <h1 class="font-medium mb-4">One font. One size.<br>No decoration.</h1>
+    <p class="opacity-60 mb-8 max-w-lg">
+      A minimalist design system for AI-generated interfaces. IBM Plex Mono throughout,
+      monochromatic stone palette, opacity-based hierarchy, dark and light mode.
+    </p>
+    <div class="flex flex-wrap items-center gap-4">
+      <code class="bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-4 py-2">npx skills add zeke/minimalist-design-skill</code>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="max-w-5xl mx-auto px-6 md:px-8">
+    <hr class="border-stone-200 dark:border-stone-800">
+  </div>
+
+  <!-- Principles -->
+  <section id="principles" class="max-w-5xl mx-auto px-6 md:px-8 py-16">
+    <h2 class="font-medium mb-8">Five principles</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800 border border-stone-200 dark:border-stone-800">
+
+      <div class="bg-stone-50 dark:bg-stone-950 p-6">
+        <p class="opacity-35 mb-2">01</p>
+        <p class="font-medium mb-2">One font, one size</p>
+        <p class="opacity-60">IBM Plex Mono at 1rem everywhere. No type scale. Weight and opacity carry hierarchy, not size.</p>
+      </div>
+
+      <div class="bg-stone-50 dark:bg-stone-950 p-6">
+        <p class="opacity-35 mb-2">02</p>
+        <p class="font-medium mb-2">Opacity, not hue</p>
+        <p class="opacity-60">Secondary text at 60%, tertiary at 35%. Never change the stone hue to de-emphasize content.</p>
+      </div>
+
+      <div class="bg-stone-50 dark:bg-stone-950 p-6">
+        <p class="opacity-35 mb-2">03</p>
+        <p class="font-medium mb-2">Stone by default</p>
+        <p class="opacity-60">Warm neutral gray throughout. Swap for zinc, slate, or neutral if the palette doesn't fit the project.</p>
+      </div>
+
+      <div class="bg-stone-50 dark:bg-stone-950 p-6">
+        <p class="opacity-35 mb-2">04</p>
+        <p class="font-medium mb-2">No decoration</p>
+        <p class="opacity-60">No shadows, no gradients, no large rounded corners. Borders only when they carry meaning. Whitespace is the structure.</p>
+      </div>
+
+      <div class="bg-stone-50 dark:bg-stone-950 p-6">
+        <p class="opacity-35 mb-2">05</p>
+        <p class="font-medium mb-2">System dark mode</p>
+        <p class="opacity-60">Honors <code>prefers-color-scheme</code> with no JavaScript. Every color token has a dark counterpart.</p>
+      </div>
+
+      <div class="bg-stone-100 dark:bg-stone-900 p-6 flex flex-col justify-between">
+        <p class="opacity-60 italic">
+          "The best design is invisible. You notice the content, not the container."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="max-w-5xl mx-auto px-6 md:px-8">
+    <hr class="border-stone-200 dark:border-stone-800">
+  </div>
+
+  <!-- Typography showcase -->
+  <section id="components" class="max-w-3xl mx-auto px-6 md:px-8 py-16">
+    <h2 class="font-medium mb-2">Typography</h2>
+    <p class="opacity-60 mb-8">One size. Weight and opacity do all the work.</p>
+
+    <div class="space-y-4 border border-stone-200 dark:border-stone-800 p-6 mb-4">
+      <p class="font-medium">font-medium — headings, labels, emphasis</p>
+      <p>font-normal — body text, default for most content</p>
+      <p class="opacity-60">opacity-60 — secondary text, descriptions, metadata</p>
+      <p class="opacity-35">opacity-35 — hints, placeholders, tertiary content</p>
+      <p class="italic opacity-60">italic opacity-60 — captions, asides, annotations</p>
+    </div>
+
+    <dl class="space-y-2 opacity-60">
+      <div class="flex gap-8">
+        <dt class="w-28 shrink-0">font</dt>
+        <dd>IBM Plex Mono</dd>
+      </div>
+      <div class="flex gap-8">
+        <dt class="w-28 shrink-0">size</dt>
+        <dd>1rem (16px) — everywhere</dd>
+      </div>
+      <div class="flex gap-8">
+        <dt class="w-28 shrink-0">line-height</dt>
+        <dd>1.6</dd>
+      </div>
+      <div class="flex gap-8">
+        <dt class="w-28 shrink-0">weights</dt>
+        <dd>400 (normal), 500 (medium)</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- Buttons -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 pb-16">
+    <h2 class="font-medium mb-2">Buttons</h2>
+    <p class="opacity-60 mb-8">Three levels: filled, outlined, ghost.</p>
+
+    <div class="flex flex-wrap items-center gap-4 border border-stone-200 dark:border-stone-800 p-6">
+      <button class="bg-stone-950 text-stone-50 dark:bg-stone-50 dark:text-stone-950 px-4 py-2 hover:opacity-80 transition-opacity">
+        primary
+      </button>
+      <button class="border border-stone-950 dark:border-stone-50 px-4 py-2 hover:bg-stone-950 hover:text-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-950 transition-colors">
+        secondary
+      </button>
+      <button class="opacity-60 hover:opacity-100 transition-opacity px-4 py-2">
+        ghost
+      </button>
+      <button class="text-red-600 dark:text-red-400 opacity-80 hover:opacity-100 transition-opacity px-4 py-2">
+        destructive
+      </button>
+    </div>
+  </section>
+
+  <!-- Cards -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 pb-16">
+    <h2 class="font-medium mb-2">Cards</h2>
+    <p class="opacity-60 mb-8">Borders, not shadows. No rounded corners.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="border border-stone-200 dark:border-stone-800 p-6">
+        <p class="font-medium mb-1">Basic card</p>
+        <p class="opacity-60">A simple bordered container. No surface color change needed.</p>
+      </div>
+      <div class="border border-stone-200 dark:border-stone-800 border-t-2 border-t-stone-950 dark:border-t-stone-50 p-6">
+        <p class="font-medium mb-1">Accented card</p>
+        <p class="opacity-60">Top border accent for featured or active items. Used sparingly.</p>
+      </div>
+      <div class="bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-6">
+        <p class="font-medium mb-1">Surface card</p>
+        <p class="opacity-60">Slight background tint for grouping related items.</p>
+      </div>
+      <div class="border border-stone-200 dark:border-stone-800 p-6 flex flex-col justify-between gap-4">
+        <div>
+          <p class="font-medium mb-1">Action card</p>
+          <p class="opacity-60">A card with a call to action below the content.</p>
+        </div>
+        <a href="#" class="border border-stone-300 dark:border-stone-700 px-4 py-2 text-center hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors">learn more</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 pb-16">
+    <h2 class="font-medium mb-2">Table</h2>
+    <p class="opacity-60 mb-8">Column values in secondary opacity, headings at full weight.</p>
+
+    <div class="border border-stone-200 dark:border-stone-800 overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="border-b border-stone-200 dark:border-stone-800">
+            <th class="text-left font-medium px-4 py-3">token</th>
+            <th class="text-left font-medium px-4 py-3">value</th>
+            <th class="text-left font-medium px-4 py-3">use</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-stone-200 dark:divide-stone-800">
+          <tr>
+            <td class="px-4 py-3">--color-bg</td>
+            <td class="px-4 py-3 opacity-60">stone-50 / stone-950</td>
+            <td class="px-4 py-3 opacity-60">page background</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">--color-surface</td>
+            <td class="px-4 py-3 opacity-60">stone-100 / stone-900</td>
+            <td class="px-4 py-3 opacity-60">card, code block</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">--color-border</td>
+            <td class="px-4 py-3 opacity-60">stone-200 / stone-800</td>
+            <td class="px-4 py-3 opacity-60">dividers, outlines</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">--color-text</td>
+            <td class="px-4 py-3 opacity-60">stone-950 / stone-50</td>
+            <td class="px-4 py-3 opacity-60">primary text</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Code block -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 pb-16">
+    <h2 class="font-medium mb-2">Code</h2>
+    <p class="opacity-60 mb-8">Same font everywhere means code blocks feel native, not foreign.</p>
+
+    <pre class="bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-6 overflow-x-auto"><code><span class="opacity-35">// one font, one size, everywhere</span>
+* {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+}</code></pre>
+  </section>
+
+  <!-- Form -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 pb-16">
+    <h2 class="font-medium mb-2">Form</h2>
+    <p class="opacity-60 mb-8">Inputs with border focus, no rounded corners, no shadows.</p>
+
+    <form class="space-y-5 border border-stone-200 dark:border-stone-800 p-6" onsubmit="return false">
+      <div class="space-y-1">
+        <label class="font-medium" for="name">name</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="your name"
+          class="w-full border border-stone-300 dark:border-stone-700 bg-transparent px-3 py-2 focus:outline-none focus:border-stone-950 dark:focus:border-stone-50 transition-colors placeholder:opacity-35"
+        >
+      </div>
+      <div class="space-y-1">
+        <label class="font-medium" for="message">message</label>
+        <textarea
+          id="message"
+          rows="3"
+          placeholder="say something..."
+          class="w-full border border-stone-300 dark:border-stone-700 bg-transparent px-3 py-2 focus:outline-none focus:border-stone-950 dark:focus:border-stone-50 transition-colors placeholder:opacity-35 resize-none"
+        ></textarea>
+        <p class="opacity-35">optional context for your message</p>
+      </div>
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="agree" class="mt-1 accent-stone-950 dark:accent-stone-50">
+        <label for="agree" class="opacity-60">send me occasional updates</label>
+      </div>
+      <button type="submit" class="border border-stone-950 dark:border-stone-50 px-4 py-2 hover:bg-stone-950 hover:text-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-950 transition-colors">
+        send message
+      </button>
+    </form>
+  </section>
+
+  <!-- Callouts -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 pb-16">
+    <h2 class="font-medium mb-2">Callouts</h2>
+    <p class="opacity-60 mb-8">Left border accent instead of color backgrounds.</p>
+
+    <div class="space-y-4">
+      <div class="border-l-2 border-stone-950 dark:border-stone-50 pl-4 py-1">
+        <p class="font-medium mb-1">Note</p>
+        <p class="opacity-60">Use border-l-2 at full opacity to call out neutral information without introducing color.</p>
+      </div>
+      <div class="border-l-2 border-amber-500 pl-4 py-1">
+        <p class="font-medium mb-1 text-amber-700 dark:text-amber-400">Warning</p>
+        <p class="opacity-60">Amber is the one semantic exception. Use only for genuine warnings, not decoration.</p>
+      </div>
+      <div class="border-l-2 border-red-500 pl-4 py-1">
+        <p class="font-medium mb-1 text-red-600 dark:text-red-400">Error</p>
+        <p class="opacity-60">Red for errors. The only other semantic exception alongside amber.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="max-w-5xl mx-auto px-6 md:px-8">
+    <hr class="border-stone-200 dark:border-stone-800">
+  </div>
+
+  <!-- Install -->
+  <section class="max-w-3xl mx-auto px-6 md:px-8 py-16">
+    <h2 class="font-medium mb-2">Install</h2>
+    <p class="opacity-60 mb-6">Works with OpenCode, Claude Code, Cursor, Copilot, and any agent that supports the <a href="https://agentskills.io" class="underline underline-offset-2 hover:opacity-60 transition-opacity">Agent Skills</a> spec.</p>
+
+    <div class="space-y-4">
+      <div>
+        <p class="opacity-60 mb-2">via npx skills:</p>
+        <pre class="bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-4 overflow-x-auto"><code>npx skills add zeke/minimalist-design-skill</code></pre>
+      </div>
+      <div>
+        <p class="opacity-60 mb-2">or manually:</p>
+        <pre class="bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-4 overflow-x-auto"><code>gh repo clone zeke/minimalist-design-skill /tmp/mds
+cp -r /tmp/mds/minimalist-design ~/.config/opencode/skills/</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-stone-200 dark:border-stone-800">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 py-8 flex flex-wrap items-center justify-between gap-4">
+      <p class="opacity-60">MIT license</p>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/zeke/minimalist-design-skill" class="opacity-60 hover:opacity-100 transition-opacity">github</a>
+        <a href="https://agentskills.io" class="opacity-60 hover:opacity-100 transition-opacity">agentskills.io</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
